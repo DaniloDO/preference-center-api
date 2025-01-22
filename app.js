@@ -1,7 +1,12 @@
 import express from "express"
 import dotenv from "dotenv"
 
-const app = express(); 
+const app = express();
+const environment = process.env.NODE_ENV || "development"; 
+
+dotenv.config({path: `.${environment}.env`});
+console.log(`environment: ${environment}`);
+
 const port = process.env.PORT || 3000; 
 
 app.use(express.json()); 
