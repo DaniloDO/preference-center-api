@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv"; 
 import postgreClient from "./src/database/config/postgreClient.js";
-import UserRepository from "./src/repositories/usersRepository.js";
-import userRouter from "./src/routes/usersRoutes.js";
+import userRouter from "./src/routes/userRoutes.js";
+import eventsRouter from "./src/routes/eventsRoutes.js";
 
 const app = express();
 const environment = process.env.NODE_ENV || "development"; 
@@ -14,11 +14,11 @@ const port = process.env.PORT || 3000;
 
 postgreClient;
 
-const userRepository = new UserRepository(postgreClient); 
-
 app.use(express.json()); 
 app.use(express.urlencoded({extended: true}));
-app.use("/users", userRouter); 
+app.use("/users", userRouter);
+app.use("/events", eventsRouter); 
+ 
 
 app.set("json spaces", 2);
 
